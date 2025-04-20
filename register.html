@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | NeonDAW</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-body">
+  <div class="login-wrapper">
+    <div class="login-box glass">
+      <h1 class="neon-title">🚀 NeonDAW</h1>
+      <h2 class="form-subtitle">Create your account</h2>
+
+      <form id="register-form" autocomplete="off">
+        <label for="new-username">Username</label>
+        <input type="text" id="new-username" name="username" placeholder="Enter username" required />
+
+        <label for="new-password">Password</label>
+        <input type="password" id="new-password" name="password" placeholder="Enter password" required />
+
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required />
+
+        <button type="submit" class="neon-button">Register</button>
+      </form>
+
+      <p class="register-link">
+        Already have an account? <a href="login.html">Login here</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>
