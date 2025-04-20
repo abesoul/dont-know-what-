@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeonDAW</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Redirect to login if user not authenticated -->
+  <script>
+    if (!localStorage.getItem("loggedInUser")) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- Auth bar -->
+  <header id="auth-bar">
+    <span>🧑‍🚀 Welcome, <span id="user-name"></span></span>
+    <button onclick="logout()">Logout</button>
+  </header>
+
+  <main class="app-container">
+    <h1 class="title">🎧 NeonDAW - Futuristic Audio Workstation</h1>
+
+    <!-- Upload & Control Section -->
+    <section class="upload-controls">
+      <input type="file" id="file-upload" accept="audio/*" multiple />
+      <input type="text" id="assign-key" placeholder="Assign to key (A-Z)" />
+      <button id="save-project-btn">💾 Save</button>
+      <button id="download-project-btn">⬇️ Download</button>
+    </section>
+
+    <!-- Display Section -->
+    <section id="display">
+      <h2 id="display-text">Tap a Pad or Press a Key</h2>
+    </section>
+
+    <!-- Pad Grid -->
+    <div class="pad-grid">
+      <div class="drum-pad" data-key="Q">Q</div>
+      <div class="drum-pad" data-key="W">W</div>
+      <div class="drum-pad" data-key="E">E</div>
+      <div class="drum-pad" data-key="A">A</div>
+      <div class="drum-pad" data-key="S">S</div>
+      <div class="drum-pad" data-key="D">D</div>
+      <div class="drum-pad" data-key="Z">Z</div>
+      <div class="drum-pad" data-key="X">X</div>
+      <div class="drum-pad" data-key="C">C</div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <nav class="tabs">
+      <button class="tab-btn" onclick="showTab('sequencer')">🎛️ Sequencer</button>
+      <button class="tab-btn" onclick="showTab('fx')">🎚️ FX</button>
+      <button class="tab-btn" onclick="showTab('library')">🎵 Library</button>
+      <button class="tab-btn" onclick="showTab('challenges')">🔥 Challenges</button>
+      <button class="tab-btn" onclick="showTab('settings')">⚙️ Settings</button>
+    </nav>
+
+    <!-- Sequencer Tab -->
+    <section id="sequencer" class="tab-content">
+      <div class="tab-panel">
+        <h2>🎛️ Step Sequencer</h2>
+        <div class="sequencer-controls">
+          <button onclick="addTrack()">➕ Add Track</button>
+          <button onclick="playSequence()">▶️ Play</button>
+          <button onclick="stopSequence()">⏹️ Stop</button>
+          <button onclick="clearSequencer()" class="danger">🧼 Clear</button>
+        </div>
+        <div id="sequencer-grid" class="sequencer-grid"></div>
+      </div>
+    </section>
+
+    <!-- FX Tab -->
+    <section id="fx" class="tab-content">
+      <h2>🎚️ FX Panel</h2>
+      <div class="effects">
+        <label>Delay: <input type="range" id="delay" min="0" max="1" step="0.01"></label>
+        <label>Filter: <input type="range" id="filter" min="0" max="1" step="0.01"></label>
+        <label>Bitcrusher: <input type="range" id="bitcrusher" min="0" max="1" step="0.01"></label>
+      </div>
+    </section>
+
+    <!-- Library Tab -->
+    <section id="library" class="tab-content">
+      <div class="tab-panel">
+        <h2>🎵 Sample Library</h2>
+        <p>Upload custom audio files and assign them to keys.</p>
+        <input type="file" id="upload-sample" accept="audio/*" multiple />
+        <select id="assign-sample-key">
+          <option value="">Assign to Key</option>
+          <option value="Q">Q</option>
+          <option value="W">W</option>
+          <option value="E">E</option>
+          <option value="A">A</option>
+          <option value="S">S</option>
+          <option value="D">D</option>
+          <option value="Z">Z</option>
+          <option value="X">X</option>
+          <option value="C">C</option>
+        </select>
+        <ul id="sample-list"></ul>
+      </div>
+    </section>
+
+    <!-- Challenges Tab -->
+    <section id="challenges" class="tab-content">
+      <div class="tab-panel">
+        <h2>🔥 Beat Challenges</h2>
+        <p>Complete creative challenges to improve your skills.</p>
+        <div class="challenge">
+          <p>Challenge 1: Make a 4-step loop!</p>
+          <button onclick="startChallenge()">🚀 Start</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings Tab -->
+    <section id="settings" class="tab-content">
+      <div class="tab-panel">
+        <h2>⚙️ Settings</h2>
+        <label><input type="checkbox" id="snap-toggle"> Snap to Grid</label>
+        <label><input type="checkbox" id="quantize-toggle"> Quantize Notes</label>
+        <label>Routing:
+          <select id="routing-options">
+            <option value="stereo">Stereo</option>
+            <option value="mono">Mono</option>
+            <option value="split">Split</option>
+          </select>
+        </label>
+        <button onclick="savePreset()">💾 Save Preset</button>
+        <button onclick="loadPreset()">📂 Load Preset</button>
+        <canvas id="waveform" width="800" height="100"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
